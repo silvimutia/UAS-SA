@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/f3d96ec7f0e8f034cc22ea73b3797b59/raw/856f1dbb8d807aabceb80b6d4f94b464df461b3e/gotham.css">
+    <link rel="stylesheet" href="style.css" />
+    <title>Project Akhir Strategi Algoritmik</title>
+  </head>
+  <body>
+    <div style="text-align: center;" id="title">
+      <label style="font-size: 30px; font-weight: 600; color: #FFFF;">EKSPEDISI</label>
+      <label style="font-size: 30px; font-weight: 200; color: #FFFF;"> JAMBI</label>
+    </div>
+    <div style="padding: 15px">
+      <div style="display: flex;justify-content: center;">
+        <div class="card" id="card-title">
+          <div style="margin-top: 8px; display: flex; align-items: center;flex-direction: column;">
+            <div style="width:200px">
+              <label id="white-font"> Tipe Greedy</label>
+              <select class="greedy_tipe" id="select-white">
+                <option value="Max">Max</option>
+                <option value="Min">Min</option>
+              </select>
+            </div>
+            <div style="width:200px; margin-top: 8px">
+              <label id="white-font"> Variasi Greedy</label>
+              <select class="greedy_variasi" id="select-white">
+                <option value="profit">Profit</option>
+                <option value="weight">Weight</option>
+                <option value="density">Density</option>
+              </select>
+              <div style="margin-top: 8px">
+                <label id="white-font">Jumlah Pelanggan</label>
+              </div>
+              <div class="grid-jumlah-pelanggan">
+                <input type="number" style="width: 100%" id="jumlah_pelanggan" class="select-white"/>
+                <button class="button" type="button" onclick="addBarang()" id="button_addBarang">Add </button>
+              </div>
+              <div style="width:200px; margin-top: 8px" >
+                <label id="white-font"> Bobot Maksimal (KG)</label>
+                <input type="number" id="bobot_maksimal" class="select-white">
+              </div>
+              <div class="button-simpan-hitung">
+                <button class="button" type="button" onclick="simpanData()" id="button_simpan">Simpan Data</button>
+                <button class="button" type="button" onclick="hitungData()" id="button_hitung">Hitung</button>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div id="hasil" style="margin-top: 16px;">
+              
+        </div>
+        <div id="hasil_hitung" style="">
+              
+        </div>
+      </div>
+      <div id="barang" style="display: flex; flex-direction: column; align-items: center; gap: 32px;">
+      </div>
+    </div>
+    
+    </div>
+  </body>
+  <script>
+    const hasil = document.querySelector("#hasil");
+    const hasil_hitung = document.querySelector("#hasil_hitung");
+    
+    let nama_barang =[];
+    let bobot = [];
+    let profit =[];
+    
+    let urutan_barang;
+    let total_profit;
+    let total_bobot;
+    let sisa_bobot;
+
+
+    function greedyMaxProfit(array) {
+      array.sort((a, b) => b[2] - a[2]);
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang,total_profit,total_bobot,sisa_bobot];
+    }
+
+    function greedyMinProfit(array) {
+      array.sort((a, b) => a[2] - b[2]);
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang,total_profit,total_bobot,sisa_bobot];
+    }
+
+    function greedyMaxWeight(array) {
+      array.sort((a, b) => b[1] - a[1]);
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang,total_profit,total_bobot,sisa_bobot];
+    }
+
+    function greedyMinWeight(array) {
+      array.sort((a, b) => a[1] - b[1]);
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang,total_profit,total_bobot,sisa_bobot];
+    }
+
+    function greedyMaxDensity(array) {
+      array.sort((a, b) => {
+        let densityDiff = b[2] / b[1] - a[2] / a[1];
+        if (densityDiff !== 0) {
+          return densityDiff;
+        } else {
+          return b[1] - a[1]; // Jika density sama, bandingkan berdasarkan bobot
+        }
+      });
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang, total_profit, total_bobot, sisa_bobot];
+    }
+
+    function greedyMinDensity(array) {
+      array.sort((a, b) => {
+        let densityDiff = a[2] / a[1] - b[2] / b[1];
+        if (densityDiff !== 0) {
+          return densityDiff;
+        } else {
+          return a[1] - b[1]; // Jika density sama, bandingkan berdasarkan bobot
+        }
+      });
+      let urutan_barang = [];
+      let bobot_maksimal = parseInt(document.querySelector("#bobot_maksimal").value);
+      let total_time = 0;
+      let total_profit = 0;
+
+      for (let i = 0; i < array.length; i++) {
+        let task = array[i];
+        if (bobot_maksimal >= task[1]) {
+          urutan_barang.push(task[0]);
+          total_profit += task[2];
+          bobot_maksimal -= task[1];
+          total_time += task[1];
+        }
+      }
+
+      let total_bobot = total_time;
+      let sisa_bobot = bobot_maksimal;
+      return [urutan_barang, total_profit, total_bobot, sisa_bobot];
+    }
+
+    function addBarang() {
+      const Jumlah = document.querySelector("#jumlah_pelanggan").value;
+      const barang = document.querySelector("#barang");
+      let card = "";
+
+      for (let i = 1; i <= Jumlah; i++) {
+        card += `
+        <div class="card">
+            <div>
+              <label id="white-font">Nama Pelanggan ${i}</label>
+              <input class="input select-white" type="text" id="namaPelanggan-${i}"/>
+            </div>
+            <div>
+              <label id="white-font">Nama Barang ${i}</label>
+              <input class="input select-white" type="text" id="nama-${i}"/>
+            </div>
+            <div>
+              <label id="white-font">Bobot (KG) ${i}</label>
+              <input class="input select-white" type="number" id="bobot-${i}" />
+            </div>
+            <div>
+              <label id="white-font">Profit(Rupiah) ${i}</label>
+              <input class="input select-white" type="number" id="profit-${i}"/>
+            </div>
+        </div>
+            `;
+      }
+
+      barang.innerHTML = card;
+    }
+
+    function simpanData() {
+      const hasil = document.querySelector("#hasil");
+      const Jumlah = document.querySelector("#jumlah_pelanggan").value;
+      const bobot_maks = parseInt(document.querySelector("#bobot_maksimal").value);
+      let table="";
+      
+      nama_pelanggan = []
+      nama_barang = []
+      bobot = []
+      profit = []
+
+      table+=`
+      <table border=1 class="tabel">
+        <tr>
+          <th>Nama Pelanggan</th>
+          <th>Nama Barang</th>
+          <th>Bobot (KG)</th>
+          <th>Profit</th>
+        </tr>
+      `
+      for (let i = 1; i <= Jumlah; i++) {
+        nama_pelanggan.push(document.querySelector("#namaPelanggan-"+i).value)
+        nama_barang.push(document.querySelector("#nama-"+i).value)
+        bobot.push(parseInt(document.querySelector("#bobot-"+i).value))
+        profit.push(parseInt(document.querySelector("#profit-"+i).value))
+
+        table += `
+        <tr>
+          <td>${nama_pelanggan[i-1]}</td>
+          <td>${nama_barang[i-1]}</td>
+          <td>${bobot[i-1]}</td>
+          <td>${profit[i-1]}</td>
+        </tr>
+        ` 
+      }
+
+      table+=`
+      <tr>
+        <td colspan = 4>Bobot Maksimal: ${bobot_maks}</td>
+      </tr>
+      </table>
+      `
+      hasil.innerHTML = table
+    }
+
+    function hitungData(){
+      const greedy_tipe = document.querySelector('.greedy_tipe').value;
+      const greedy_variasi = document.querySelector('.greedy_variasi').value;
+      let newArray = [];
+            for (let i = 0; i < nama_barang.length; i++) {
+            newArray.push([nama_barang[i], bobot[i], profit[i]]);
+            }
+
+            if (greedy_variasi=="profit") {
+                if (greedy_tipe=="Min") {
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMinProfit(newArray);
+                }
+                else if(greedy_tipe=="Max"){
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMaxProfit(newArray);
+                }
+
+                hasil_hitung.innerHTML=`
+                <table class="tabel_hasil">
+                    <tr>
+                        <th colspan = 2>Greedy by ${greedy_variasi}</td>
+                    </tr>
+                    <tr>
+                        <td>Urutan Susunan Barang:</td>
+                        <td>
+                            ${urutan_barang}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total Profit:</td>
+                        <td>
+                            ${total_profit}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total bobot:</td>
+                        <td>
+                            ${total_bobot}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sisa bobot:</td>
+                        <td>
+                            ${sisa_bobot}
+                        </td>
+                    </tr>
+                </table>
+                `   
+            }
+            else if (greedy_variasi=="weight") {
+                if (greedy_tipe=="Min") {
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMinWeight(newArray);
+                }
+                else if(greedy_tipe=="Max"){
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMaxWeight(newArray);
+                }
+
+                hasil_hitung.innerHTML=`
+                <table  class="tabel_hasil">
+                    <tr>
+                        <th colspan = 2>Greedy by ${greedy_variasi}</td>
+                    </tr>
+                    <tr>
+                        <td>Urutan Susunan Barang:</td>
+                        <td>
+                            ${urutan_barang}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total Profit:</td>
+                        <td>
+                            ${total_profit}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total bobot:</td>
+                        <td>
+                            ${total_bobot}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sisa bobot:</td>
+                        <td>
+                            ${sisa_bobot}
+                        </td>
+                    </tr>
+                </table>
+                `  
+            }
+            else if (greedy_variasi=="density") {
+                if (greedy_tipe=="Min") {
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMinDensity(newArray);
+                }
+                else if(greedy_tipe=="Max"){
+                    [urutan_barang,total_profit,total_bobot,sisa_bobot]=greedyMaxDensity(newArray);
+                }
+
+                hasil_hitung.innerHTML=`
+                <table class="tabel_hasil">
+                    <tr>
+                        <th colspan = 2>Greedy by ${greedy_variasi}</td>
+                    </tr>
+                    <tr>
+                        <td>Urutan Susunan Barang:</td>
+                        <td>
+                            ${urutan_barang}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total Profit:</td>
+                        <td>
+                            ${total_profit}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total bobot:</td>
+                        <td>
+                            ${total_bobot}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sisa bobot:</td>
+                        <td>
+                            ${sisa_bobot}
+                        </td>
+                    </tr>
+                </table>
+                `
+            }
+    }
+  </script>
+</html>

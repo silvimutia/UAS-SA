@@ -1,0 +1,191 @@
+/* CSS Dasar */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Gotham', sans-serif;
+}
+
+body {
+  font-family: 'Gotham';
+  background-color: #0d1117;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url("/fonts/Gotham-Bold.woff") format("woff");
+}
+
+label {
+  font-size: 17px;
+  color: rgb(0, 0, 0);
+  font-family: 'Gotham', sans-serif;
+}
+
+#white-font{
+  color: white;
+}
+
+#select-white{
+  background-color: #0d1117;
+  color: white;
+}
+
+.select-white{
+  background-color: #0d1117;
+  color: white;
+}
+
+#title{
+  background-color: #010409;
+  padding: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-bottom: 0.5px solid #ccc !important;
+}
+
+#button_addBarang{
+  width:40%;
+  margin-left: 8px;
+  border: 0px;
+  border-radius: 5px;
+  height: 35px;
+  background-color: #007bff;
+  color: white;
+}
+
+#button_addBarang:hover{
+ 
+}
+
+#button_simpan{
+  word-wrap: break-word;
+  width:200px;
+  margin-top:8px;
+  border: 0px;
+  border-radius: 5px;
+  height: 35px;
+  background-color: #007bff;
+  color: white;
+}
+
+#button_simpan:hover{
+
+}
+
+#button_hitung{
+  width:200px;
+  margin-top:8px;
+  border: 0px;
+  border-radius: 5px;
+  height: 35px;
+  background-color: #28a745;
+  color: white;
+}
+
+#button_hitung:hover{
+  
+}
+
+.card {
+  margin-top: 15px;
+  background-color: #161b22;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  padding: 15px;
+  border-radius: 5px;
+  width: 700px;
+  border: 1px solid #ccc !important;
+}
+
+#card-title {
+  border-radius: 15px;
+  width: 250px;
+}
+
+.grid-jumlah-pelanggan{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  width: 100%;
+  height: 35px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #FFFFFF;
+  padding: 5px;
+  font-size: 13px;
+}
+
+input {
+  width: 100%;
+  height: 33px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: #FFFFFF;
+  padding: 5px;
+  font-size: 13px;
+  color: #333333;
+}
+
+.tabel {
+  margin-top: 10px;
+  background-color: #161b22;
+  color: white;
+  border-radius: 1px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  width: 700px;
+  border: 1px solid white;
+}
+
+.tabel th {
+  text-align: center;
+  font-weight: 900;
+  border: 1px solid white;
+}
+
+.tabel td, th {
+  border: 1px solid #000000;
+  padding: 8px;
+  border: 1px solid white;
+}
+
+.tabel_hasil {
+  margin-top: 10px;
+  background-color: #161b22;
+  color: white;
+  border-radius: 1px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  width: 700px;
+  border: 1px solid white;
+}
+
+.tabel_hasil th {
+  text-align: center;
+  font-weight: 900;
+  border: 1px solid white;
+}
+
+.tabel_hasil tr,td {
+  height: 30px;
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+  border: 1px solid white;
+}
+
+.button{
+  height: 25px;
+  width: 75px;
+  align-self: end;
+  margin-right: 15px;
+  cursor: pointer;
+}
